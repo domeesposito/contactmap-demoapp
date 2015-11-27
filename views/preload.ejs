@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html ng-app="DemoApp"> 
   <head>
-        <meta charset="UTF-8">
+
+    
+        <meta charset="UTF-8"></meta>
         <title>angular-carousel demo</title>
-        <meta name="viewport" content="width=620, user-scalable=no">
-        <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
-        <link href='/angular-carousel.css' rel='stylesheet' type='text/css'>
-        <link href='/demo.css' rel='stylesheet' type='text/css'>
+        <meta name="viewport" content="width=620, user-scalable=no"></meta>
+        <link href="http://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet" type="text/css"></link>
+        <link href="/angular-carousel.css" rel="stylesheet" type="text/css"></link>
+        <link href="/demo.css" rel="stylesheet" type="text/css"></link>
+
     <style type="text/css">
+
       html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
 
     </style>
@@ -27,7 +31,31 @@
     <script src="./src/directives/sliceFilter.js"></script>
     <script src="./src/directives/shifty.js"></script>
      -->
-    <script>
+    
+  </head>
+  <body ng-controller="DemoCtrl"> 
+
+    <div id="mainpage">
+        <button type="button" onclick="goToMap()">Click Me!</button>
+    </div>
+    <div>
+    <div >
+        <h3>buffered ngRepeat with custom transition</h3>
+        <div class="details">Use the 'hexagon' transition. index is shared with the carousel below.
+        </div>
+        <div class="carousel-demo">
+            <ul rn-carousel rn-carousel-index="carouselIndex3" rn-carousel-transition="hexagon" rn-carousel-buffered class="carousel3">
+                <li ng-repeat="slide in slides3 track by slide.id">
+                    <div ng-style="{'background-image': 'url(' + slide.img + ')'}"  class="bgimage">
+                      #{{ slide.id }}
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+  </body>
+
+  <script>
         angular.module('DemoApp', [
             'angular-carousel'
         ])
@@ -160,28 +188,6 @@
         })
     </script>
 
-  </head>
-<body ng-controller="DemoCtrl"> 
-
-    <div id="mainpage">
-        <button type="button" onclick="goToMap()">Click Me!</button>
-    </div>
-    <div>
-    <div >
-        <h3>buffered ngRepeat with custom transition</h3>
-        <div class="details">Use the 'hexagon' transition. index is shared with the carousel below.
-        </div>
-        <div class="carousel-demo">
-            <ul rn-carousel rn-carousel-index="carouselIndex3" rn-carousel-transition="hexagon" rn-carousel-buffered class="carousel3">
-                <li ng-repeat="slide in slides3 track by slide.id">
-                    <div ng-style="{'background-image': 'url(' + slide.img + ')'}"  class="bgimage">
-                      #{{ slide.id }}
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
-  </body>
 </html>
 
 
