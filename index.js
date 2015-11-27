@@ -103,7 +103,7 @@ app.get('/preload',function(req, res){
 	
 		res.render('preload',{});
 	
-} 
+});
 
 app.get('/create', function(req, res){
   var create_url = 'https://connect.heroku.com/dashboard-next/create-connection';
