@@ -92,14 +92,14 @@ app.set('view engine', 'ejs');
 	});
 });*/
 
-app.get('/', function(req, res) {
+app.get('/map', function(req, res) {
 	load_contacts(function(error, contact_locations) {
 		console.log("Locations: ", contact_locations);
 		res.render('index', {contact_locations: contact_locations.filter(function(val) { return val })});
 	});
 });
 
-app.get('/preload',function(req, res){
+app.get('/',function(req, res){
 	
 		res.render('preload',{});
 	
