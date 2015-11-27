@@ -12,7 +12,7 @@ var db = new Sequelize(dburl, {
 				logging: false
 			 });
 
-
+// questa è connesione alla tabella contact sync da salesforce >> eventualmente se dovete aggiungere qsa è qui che lo fai
 var Contact = db.define('Contact', {
 	id: Sequelize.INTEGER,
 	sfid: Sequelize.STRING,
@@ -29,6 +29,7 @@ var Contact = db.define('Contact', {
 	}
 );
 
+//come sopra, ma è l'altra tabella
 Geocode = db.define('geocode', {
     id: Sequelize.INTEGER,
     address: Sequelize.STRING,
@@ -43,6 +44,8 @@ db.sync();
 
 var contact_locations = [];
 
+
+//questa è la funzione che scrive le coordinate sulla tabma prima di scriverle chiama geocode()
 function geocode_contact(contact, callback) {
 	if (contact.values.mailingstreet || 
 		contact.values.mailingcity || 
@@ -63,7 +66,7 @@ function geocode_contact(contact, callback) {
 		callback();
 	}
 }
-
+// fa una query sula tabelle  e prende tutti i contatti
 function load_contacts(callback) {
 	Contact.findAll({limit:200}).then(function(rows) {
 		async.map(rows, geocode_contact, callback);
@@ -73,7 +76,7 @@ function load_contacts(callback) {
 
 
 // EXPRESS
-
+/*---------------------------------*/
 var express = require('express');
 var app = express();
 
@@ -82,12 +85,25 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', './views');
 app.set('view engine', 'ejs');
 
-app.get('/', function(req, res) {
+/*app.get('/', function(req, res) {
+	load_contacts(function(error, contact_locations) {
+		console.log("Locations: ", contact_locations);
+		res.render('index', {contact_locations: contact_locations.filter(function(val) { return val })});
+	});
+});*/
+
+app.get('/map', function(req, res) {
 	load_contacts(function(error, contact_locations) {
 		console.log("Locations: ", contact_locations);
 		res.render('index', {contact_locations: contact_locations.filter(function(val) { return val })});
 	});
 });
+
+app.get('/',function(req, res){
+	
+		res.render('preload');
+	
+} 
 
 app.get('/create', function(req, res){
   var create_url = 'https://connect.heroku.com/dashboard-next/create-connection';
@@ -106,3 +122,9 @@ app.get('/create', function(req, res){
 app.listen(app.get('port'), function() {
   console.log("Node app is running at localhost:" + app.get('port'));
 });
+
+// tutto questo blocco è il routing di nodejs
+// dove vedi "/" vuol dire che quando entri nella root ( da url ) dell'applicazione invoca la nz load_contacts
+//una volta recuperate le coordinate e messe nell'array
+//l'app dice a node js di fare il render dlela pagina index.html
+// STOP > banale
