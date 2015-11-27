@@ -101,7 +101,7 @@ app.get('/map', function(req, res) {
 
 app.get('/',function(req, res){
 	
-		res.render('preload');
+		res.render('preload',{});
 	
 } 
 
