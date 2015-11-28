@@ -41,6 +41,8 @@
         setTimeout(function() {
           map.setCenter({lat: 41.91214, lng: 12.47383});
         }, 800);
+
+        map.setCenter(new google.maps.LatLng(41.91214,12.47383))
       }
       google.maps.event.addDomListener(window, 'load', initialize);
     </script>
