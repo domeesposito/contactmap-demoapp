@@ -25,7 +25,25 @@
                     </ul>
                 </div>-->
                  <div ng-controller="DemoCtrl" id="slides_control">
-    <div>
+                <div>
+                <style type="text/css">
+
+                  #slides_control > div{
+                    height: 200px;
+                  }
+                  img{
+                    margin:auto;
+                    width: 400px;
+                  }
+                  #slides_control {
+                    position:absolute;
+                    width: 400px;
+                    left:50%;
+                    top:20px;
+                   margin-left:-200px;
+                  }
+
+                </style>
                 <carousel interval="myInterval">
                   <slide ng-repeat="slide99 in slides99" active="slide.active">
                     <img ng-src="{{slide99.image}}">
