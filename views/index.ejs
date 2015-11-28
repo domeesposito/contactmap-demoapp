@@ -10,7 +10,7 @@
     <script type="text/javascript">
       function initialize() {
         var mapOptions = {
-          center: { lat: 39.8282, lng: -98.5795},
+          center: { lat: 41.91214, lng: 12.47383},
           zoom: 5
         };
         var map = new google.maps.Map(document.getElementById('map-canvas'),
@@ -25,9 +25,15 @@
           var infowindow = new google.maps.InfoWindow({
               content: unescape(location.name)
           });
+          
           infowindow.open(map,marker);
+          
+          marker.addListener('click', function() {
+            //map.setZoom(8);
+            //map.setCenter(marker.getPosition());
+            window.location.href="https://hackatondd.herokuapp.com/detail"
+          });
         }
-
         <% contact_locations.forEach(function(location) { %>
           addMarker(JSON.parse('<%- JSON.stringify(location) %>'));
         <% }); %>
