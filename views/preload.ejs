@@ -11,13 +11,11 @@
     <body ng-controller="DemoCtrl">
         <div id="mainpage">
     </div>
-        <a href="https://eu.deloittedigital.com/en/home"><img style="position: absolute; top: 0; right: 0; border: 0;" src="/public/sheriff.png" alt="Powered by Deloitte SheriffOne"></a>
+        <a href="https://eu.deloittedigital.com/en/home"><img style="position: absolute; top: 0; right: 0; border: 0;" src="/sheriff.png" alt="Powered by Deloitte SheriffOne"></a>
         <div>
             <div >
                 <h3>Welcome to the Digital Store</h3>
-                <div class="details">Scroll the transition to view our products.
-                </div>
-                <div class="carousel-demo">
+                <!--<div class="carousel-demo">
                     <ul rn-carousel rn-carousel-index="carouselIndex3" rn-carousel-transition="hexagon" rn-carousel-buffered class="carousel3">
                         <li ng-repeat="slide in slides3 track by slide.id">
                             <div ng-style="{'background-image': 'url(' + slide.img + ')'}"  class="bgimage">
@@ -25,7 +23,17 @@
                             </div>
                         </li>
                     </ul>
-                </div>
+                </div>-->
+                <carousel interval="myInterval">
+                  <slide ng-repeat="slide in slides2" active="slide.active">
+                    <img ng-src="{{slide.image}}">
+                    <div class="carousel-caption">
+                      <h4>Slide {{$index+1}}</h4>
+                    </div>
+                  </slide>
+                </carousel>
+
+
             </div>
         </div>
         <p>&nbsp;</p>
@@ -63,6 +71,23 @@
             'angular-carousel'
         ])
         .controller('DemoCtrl', function($scope) {
+              $scope.myInterval = 3000;
+              $scope.slides2 = [
+                {
+                  image: 'img1.jpg'
+                },
+                {
+                  image: 'img2.jpg'
+                },
+                {
+                  image: 'img3.jpg'
+                },
+                {
+                  image: 'img4.jpg'
+                }
+              ];
+            }
+
             $scope.colors = ["#fc0003", "#f70008", "#f2000d", "#ed0012", "#e80017", "#e3001c", "#de0021", "#d90026", "#d4002b", "#cf0030", "#c90036", "#c4003b", "#bf0040", "#ba0045", "#b5004a", "#b0004f", "#ab0054", "#a60059", "#a1005e", "#9c0063", "#960069", "#91006e", "#8c0073", "#870078", "#82007d", "#7d0082", "#780087", "#73008c", "#6e0091", "#690096", "#63009c", "#5e00a1", "#5900a6", "#5400ab", "#4f00b0", "#4a00b5", "#4500ba", "#4000bf", "#3b00c4", "#3600c9", "#3000cf", "#2b00d4", "#2600d9", "#2100de", "#1c00e3", "#1700e8", "#1200ed", "#0d00f2", "#0800f7", "#0300fc"];
             function getSlide(target, style) {
                 var i = 0;//target.length;
