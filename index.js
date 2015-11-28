@@ -105,6 +105,10 @@ app.get('/',function(req, res){
 	
 });
 
+app.get('/detail',function(req, res){
+		res.render('detail',{});
+});
+
 app.get('/create', function(req, res){
   var create_url = 'https://connect.heroku.com/dashboard-next/create-connection';
   // Redirect to Heroku Connect dashboard to finish setup
